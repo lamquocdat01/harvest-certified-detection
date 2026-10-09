@@ -50,8 +50,8 @@ def main():
             continue
         diffs = []
         a, b = json.loads((ref / f).read_text()), json.loads((rep / f).read_text())
-        if f == "corpus_rebuild_check.json":      # absolute paths differ between machines/clones
-            for d in (a, b):
+        if f in ("corpus_rebuild_check.json", "numbers.json"):   # absolute paths differ between machines/clones
+            for d in ((a, b) if f == "corpus_rebuild_check.json" else (a.get("corpus", {}), b.get("corpus", {}))):
                 d.pop("detections_root", None)
                 d.get("reference", {}).pop("path", None)
         walk(a, b, f, diffs, rtol)

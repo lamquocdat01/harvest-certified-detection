@@ -102,8 +102,11 @@ def main(final):
     res["abstract_words"] = na
     first = re.split(r"(?<=[.!?])\s", abs_txt.strip(), 1)[0] if abs_txt else ""
     res["abstract_first_sentence"] = first
-    if na > MAX_ABS or na == 0:
-        fail.append(f"abstract {na} words")
+    if na > MAX_ABS or na < 150:
+        fail.append(f"abstract {na} words (IoT-J: 150-250)")
+    abs_src = src[src.find(r"\begin{abstract}"):src.find(r"\end{abstract}")]
+    if "$" in abs_src or r"\cite" in abs_src:
+        fail.append("abstract contains math or citations (IoT-J: no equations, no references)")
     if "energy-harvesting sensing nodes" not in first.lower() or first.lower().startswith("theorem"):
         fail.append("abstract sentence 1 lacks 'energy-harvesting sensing nodes' or opens with 'theorem'")
     kw = re.search(r"Index Terms[—\-–\s]+(.*?)\.\s", flat)
