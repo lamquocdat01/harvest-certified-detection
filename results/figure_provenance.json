@@ -1,0 +1,30 @@
+{
+ "F2_miss_vs_floor_test.pdf": {
+  "results_sha256": "13460549a33d93c7e496c5b72fdf06ee42bdb2bb913be668d4c2e1dfd6ff1ff3",
+  "latex_sha256": "13460549a33d93c7e496c5b72fdf06ee42bdb2bb913be668d4c2e1dfd6ff1ff3"
+ },
+ "F3_frontier_spread_vs_hf_test.pdf": {
+  "results_sha256": "4e8f440aaaac495841514a3302e571aedf3f5666ccaf5b502db05be0dc823581",
+  "latex_sha256": "4e8f440aaaac495841514a3302e571aedf3f5666ccaf5b502db05be0dc823581"
+ },
+ "F6p_throttle_kansal_amax_test.pdf": {
+  "results_sha256": "1f58ac07dd5cd90ea2bdb93434d5b44b2b4627aa206bdac04c56f4a08ca5aff7",
+  "latex_sha256": "1f58ac07dd5cd90ea2bdb93434d5b44b2b4627aa206bdac04c56f4a08ca5aff7"
+ },
+ "F7_kansal_obs_vs_pred_test.pdf": {
+  "results_sha256": "66f23a4432c943fc773d9c3ebae320aeff944e5a0422b8ef8b89cba47d2074f0",
+  "latex_sha256": "66f23a4432c943fc773d9c3ebae320aeff944e5a0422b8ef8b89cba47d2074f0"
+ },
+ "F1_frontier_K_Cstar_test.pdf": {
+  "results_sha256": "d41c84ce6860cc20b7f2e15182087e099af932cfcb41d2d9a6eb39bdc3c514e2",
+  "latex_sha256": "d41c84ce6860cc20b7f2e15182087e099af932cfcb41d2d9a6eb39bdc3c514e2"
+ },
+ "F4_gate_map_test.pdf": {
+  "results_sha256": "2768a4016af70e290869e32a510637581dc5a606113df75d42edc5775363d3af",
+  "latex_sha256": "2768a4016af70e290869e32a510637581dc5a606113df75d42edc5775363d3af"
+ },
+ "F6_throttle_vs_blackout_test.pdf": {
+  "results_sha256": "f8ca8c163b4b6447af7ab2d0f901df45aebb415f5a66cd05498bcf35eda4b759",
+  "latex_sha256": "f8ca8c163b4b6447af7ab2d0f901df45aebb415f5a66cd05498bcf35eda4b759"
+ }
+}

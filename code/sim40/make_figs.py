@@ -54,7 +54,11 @@ def f1(S, split):
             ax.plot(ks, [d[str(k)] for k in ks], color=COL[i], marker=MK[i], ms=3.5, label=site)
         ax.set(xscale="log", yscale="log", xlabel="period K", title=sea)
         ax.set_xticks([8, 16, 32, 64], ["8", "16", "32", "64"])
+        ax.xaxis.set_minor_locator(matplotlib.ticker.NullLocator())
     axs[0].set_ylabel("C*(K) [days of demand]")
+    fmt = matplotlib.ticker.FuncFormatter(lambda y, _: f"{y:g}" if round(y / 10 ** np.floor(np.log10(y))) in (1, 2, 5) else "")
+    axs[0].yaxis.set_major_formatter(fmt)
+    axs[0].yaxis.set_minor_formatter(fmt)
     axs[1].legend(frameon=False, loc="upper right", fontsize=6)
     _save(fig, "F1_frontier_K_Cstar", split)
 
@@ -68,9 +72,11 @@ def f2(S, split):
         ax.scatter(x, y, s=3, alpha=0.25, color=COL[0], label="policy × C cells", rasterized=True)
     ax.plot([0, 1], [0, 1], color="#666", lw=1, ls="--", label="miss = floor")
     v = S["main"]["F2"]
-    txt = "; ".join(f"{k}: {d['viol']}/{d['n']}" for k, d in v.items())
-    ax.set(xlabel="floor (Thm 1 / Thm 2 / Prop 2′)", ylabel="replayed miss", xlim=(0.15, 1), ylim=(0.15, 1))
-    ax.set_title("violations: " + txt, fontsize=6)
+    # violation counts go to the caption (family-wise rule of PREREG H1), not the title
+    cap = "; ".join((f"{k}: {d['viol_familywise']} family-wise / {d['n']}" if "viol_familywise" in d
+                     else f"{k}: {d['viol']} beyond 1e-6 / {d['n']}") for k, d in v.items())
+    (cfg.FIGS / f"F2_caption_{split}.txt").write_text(cap + "\n", encoding="utf-8")
+    ax.set(xlabel="floor (Theorem 1, 2 or Proposition 1)", ylabel="replayed miss", xlim=(0.15, 1), ylim=(0.15, 1))
     ax.legend(frameon=False, loc="lower right")
     _save(fig, "F2_miss_vs_floor", split)
 
@@ -78,7 +84,7 @@ def f2(S, split):
 def f3(S, split):
     eq = [x for x in S["frontier"]["equal_a"] if x["r"] == 15.0 and x["l"] == 0.04 and x["m"] == 0.25 and x["K"] == 8]
     eps = [x for x in S["frontier"]["eps_sizing"] if x["r"] == 15.0 and x["l"] == 0.04 and x["m"] == 0.25]
-    fig, axs = plt.subplots(1, 2, figsize=(W, 1.9))
+    fig, axs = plt.subplots(1, 2, figsize=(W, 2.3), gridspec_kw={"wspace": 0.5})
     for i, g in enumerate(SITES):
         e = [x for x in eq if _grp(x["site"]) == g]
         if e:
@@ -92,7 +98,8 @@ def f3(S, split):
     axs[0].set(xlabel="C_HF / C_per  (a = 1/8)", ylabel="miss_HF − miss_per")
     axs[1].set(xlabel="miss target ε", ylabel="C_TS(ε) / C_per(ε)", ylim=(0, 1.05))
     axs[1].axhline(1, color="#666", lw=0.8, ls=":")
-    axs[0].legend(frameon=False, fontsize=5.5, loc="lower right")
+    h_, l_ = axs[0].get_legend_handles_labels()
+    fig.legend(h_, l_, frameon=False, fontsize=6, loc="upper center", bbox_to_anchor=(0.5, -0.08), ncol=3)
     _save(fig, "F3_frontier_spread_vs_hf", split)
 
 
@@ -109,17 +116,16 @@ def f4(S, split):
     im = ax.imshow(M, origin="lower", aspect="auto", cmap="Blues", vmin=0, vmax=1)
     ax.set_xticks(range(len(rhos)), [f"{r:g}" for r in rhos])
     ax.set_yticks(range(len(cs)), [f"{c:g}" for c in cs])
-    rr = np.linspace(min(rhos), max(rhos), 200)
+    # both axes are categorical: draw c* as a staircase on cell edges (cells above it are infeasible, c > c*)
     a_per, r = 1 / 8, 15.0
-    cb = (1 - rr) * a_per * (r - 1)
-    xj = np.interp(rr, rhos, range(len(rhos)))
-    yj = np.interp(cb, cs, range(len(cs)), left=np.nan, right=np.nan)
-    ax.plot(xj, yj, color="#eb6834", lw=1.5, label="c*(ρ) = (1−ρ) a_per (r−1)")
+    k = [sum(c <= (1 - rho) * a_per * (r - 1) + 1e-12 for c in cs) for rho in rhos]
+    ax.stairs(np.array(k) - 0.5, np.arange(len(rhos) + 1) - 0.5, baseline=None, color="#eb6834", lw=1.5,
+              label="c*(ρ) = (1−ρ) a_per (r−1)")
     ax.axvline(np.interp(6.07, rhos, range(len(rhos))), color="#4a3aa7", ls="--", lw=1, label="presence gate ρ≈6.1")
     ax.set(xlabel="ρ = a_gate / a_per", ylabel="cue cost c [e_idle/slot]")
     ax.grid(False)
     fig.colorbar(im, ax=ax, label="gate outage at C*_per (median)")
-    ax.legend(frameon=False, fontsize=6, loc="upper right")
+    ax.legend(frameon=False, fontsize=6, loc="lower left", bbox_to_anchor=(0, 1.0), ncol=2)
     _save(fig, "F4_gate_map", split)
 
 

@@ -1,0 +1,10 @@
+Derived data in results/ (JSON result files, results/event_corpus_40.csv, figures) are released under the
+Creative Commons Attribution 4.0 International licence (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/.
+
+They are derived from third-party data, which keep their own terms and must be attributed:
+- Open-Meteo.com satellite radiation API (CC BY 4.0), DOI 10.5281/zenodo.7970649, with the underlying products
+  JMA/JAXA Himawari-9, EUMETSAT LSA SAF (MSG) and EUMETSAT CM SAF SARAH-3 (DOI 10.5676/EUM_SAF_CM/SARAH/V003).
+- CRAWDAD dataset columbia/enhants (v. 2011-04-07), M. Gorlatova, M. Zapas, E. Xu, M. Bahlke, I. Kymissis,
+  G. Zussman, DOI 10.15783/C77P47 (CC BY 4.0).
+- Event durations derived from detections on CDnet 2014, LASIESTA and BMC videos. No frames or ground-truth
+  annotations of these datasets are redistributed.

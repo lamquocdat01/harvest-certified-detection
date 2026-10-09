@@ -1,0 +1,24 @@
+{
+ "rule": "event = maximal run of consecutive frames with >= 1 detection box; datasets CDnet2014, LASIESTA, BMC",
+ "detections_root": "D:\\Datasets\\_derived\\detections_cpu_yolo26s",
+ "n_videos": 121,
+ "n_events": 3713,
+ "n_frames_total": 166589,
+ "per_dataset_videos": {
+  "CDnet2014": 53,
+  "LASIESTA": 48,
+  "BMC": 20
+ },
+ "event_corpus_40_csv_sha256": "6f135f9fa0383621da991b666c1fe2629604ca287ff0f9e08a77566f663721ac",
+ "reference": {
+  "path": "D:\\THS Programing\\09.05 Certifiable worst-case\\certifiable-frame-skipping\\data\\processed\\events_gated.csv",
+  "sha256": "8fade8f15bbb4f09ec27cb25a355af92750c618017c04e4d5d7b1917bb7cf29d",
+  "sha_expected": "8fade8f15bbb4f09ec27cb25a355af92750c618017c04e4d5d7b1917bb7cf29d",
+  "sha_ok": true,
+  "n_events": 3713
+ },
+ "rows_identical_dataset_video_onset_duration": true,
+ "F_D_hash_mine": "40f8afe9a4cc488127c03d6faedf7d0f9c2db45eb18e4cf3dc8f71c5cff48f4c",
+ "F_D_hash_reference": "40f8afe9a4cc488127c03d6faedf7d0f9c2db45eb18e4cf3dc8f71c5cff48f4c",
+ "F_D_identical": true
+}

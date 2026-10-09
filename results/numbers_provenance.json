@@ -1,0 +1,322 @@
+{
+ "nVid": {
+  "value": "121",
+  "source": "numbers.json:corpus.n_videos",
+  "note": ""
+ },
+ "nEv": {
+  "value": "3{,}713",
+  "source": "numbers.json:corpus.n_events",
+  "note": ""
+ },
+ "pDone": {
+  "value": "0.359",
+  "source": "numbers.json:F_D_all.P(D=1)",
+  "note": ""
+ },
+ "pDltEight": {
+  "value": "67.4\\,\\%",
+  "source": "numbers.json:F_D_all.P(D<8)",
+  "note": ""
+ },
+ "ED": {
+  "value": "34.0",
+  "source": "numbers.json:F_D_all.E[D]",
+  "note": ""
+ },
+ "epsKeight": {
+  "value": "0.500",
+  "source": "numbers.json:F_D_all.eps_star.8",
+  "note": ""
+ },
+ "inEventFrac": {
+  "value": "75.9\\,\\%",
+  "source": "event_corpus_40.csv sum(duration)/corpus n_frames_total",
+  "note": ""
+ },
+ "rhoPresence": {
+  "value": "6.1",
+  "source": "inEventFrac x K=8",
+  "note": ""
+ },
+ "nTraceCells": {
+  "value": "25",
+  "source": "traces.cells(): 5 outdoor products x 4 seasons + 5 indoor setups",
+  "note": ""
+ },
+ "nTone": {
+  "value": "327{,}802",
+  "source": "summary_test.json:main.F2.T1_any_policy.n",
+  "note": ""
+ },
+ "nPtwo": {
+  "value": "192{,}205",
+  "source": "summary_test.json:main.F2.P2prime_blackout.n",
+  "note": ""
+ },
+ "nTtwo": {
+  "value": "115{,}639",
+  "source": "summary_test.json:main.F2.T2_energy_floor.n",
+  "note": ""
+ },
+ "nFloorChecks": {
+  "value": "635{,}646",
+  "source": "sum of the three H1 families",
+  "note": ""
+ },
+ "zBonf": {
+  "value": "5.1",
+  "source": "summary_test.json:main.F2.T1_any_policy.z_bonferroni",
+  "note": ""
+ },
+ "Ftwocaption": {
+  "value": "Violations beyond the family-wise margin: Theorem~\ref{thm:floor}: 0 of 327{,}802; Proposition~\ref{prop:blackout}: 0 of 192{,}205; Theorem~\ref{thm:energy}: 0 of 115{,}639.",
+  "source": "summary_test.json:main.F2 (viol_familywise, n)",
+  "note": ""
+ },
+ "nPass": {
+  "value": "16",
+  "source": "prereg_score_test.json:tally.PASS",
+  "note": ""
+ },
+ "nPred": {
+  "value": "18",
+  "source": "prereg_score_test.json",
+  "note": ""
+ },
+ "tsUppFail": {
+  "value": "0.194",
+  "source": "prereg_score_test.json:H4a.medians.0.5.Uppsala",
+  "note": ""
+ },
+ "dmissMin": {
+  "value": "0.18",
+  "source": "boot_test.json:cells[].dmiss min",
+  "note": ""
+ },
+ "dmissMax": {
+  "value": "0.31",
+  "source": "boot_test.json:cells[].dmiss max",
+  "note": ""
+ },
+ "dCMinPct": {
+  "value": "55",
+  "source": "boot_test.json:cells[].dC_rel (smallest saving)",
+  "note": ""
+ },
+ "dCMaxPct": {
+  "value": "93\\,\\%",
+  "source": "boot_test.json:cells[].dC_rel (largest saving)",
+  "note": ""
+ },
+ "nHolm": {
+  "value": "56",
+  "source": "boot_test.json:holm.n_tests",
+  "note": ""
+ },
+ "nBootCells": {
+  "value": "25",
+  "source": "boot_test.json:len(cells)",
+  "note": ""
+ },
+ "pMaxBoot": {
+  "value": "1.6\\times10^{-6}",
+  "source": "boot_test.json:max p",
+  "note": ""
+ },
+ "tsMedLo": {
+  "value": "0.19",
+  "source": "prereg_score_test.json:H4a.medians min",
+  "note": ""
+ },
+ "tsMedHi": {
+  "value": "0.39",
+  "source": "prereg_score_test.json:H4a.medians max",
+  "note": ""
+ },
+ "tsInvLo": {
+  "value": "2.5",
+  "source": "1 / tsMedHi",
+  "note": ""
+ },
+ "tsInvHi": {
+  "value": "5.2",
+  "source": "1 / tsMedLo",
+  "note": ""
+ },
+ "nEps": {
+  "value": "1{,}696",
+  "source": "prereg_score_test.json:H4a.n",
+  "note": ""
+ },
+ "lbtsHi": {
+  "value": "0.974",
+  "source": "prereg_score_test.json:H4c min median eps>=0.6",
+  "note": ""
+ },
+ "lbtsGapPct": {
+  "value": "2.6\\,\\%",
+  "source": "1 - lbtsHi",
+  "note": ""
+ },
+ "lbtsLoMin": {
+  "value": "0.58",
+  "source": "prereg_score_test.json:H4c.medians_eps_0_45 min",
+  "note": ""
+ },
+ "lbtsLoMax": {
+  "value": "0.78",
+  "source": "prereg_score_test.json:H4c.medians_eps_0_45 max",
+  "note": ""
+ },
+ "avgHCMC": {
+  "value": "1.7",
+  "source": "prereg_score_test.json:H2c.medians.HCMC",
+  "note": ""
+ },
+ "avgMadrid": {
+  "value": "2.5",
+  "source": "prereg_score_test.json:H2c.medians.Madrid",
+  "note": ""
+ },
+ "avgUpp": {
+  "value": "5.3",
+  "source": "prereg_score_test.json:H2c.medians.Uppsala",
+  "note": ""
+ },
+ "avgIn": {
+  "value": "15.5",
+  "source": "prereg_score_test.json:H2c.medians.indoor",
+  "note": ""
+ },
+ "avgMaxOut": {
+  "value": "31",
+  "source": "prereg_score_test.json:H2c.max_outdoor",
+  "note": ""
+ },
+ "avgMaxIn": {
+  "value": "53",
+  "source": "prereg_score_test.json:H2c.max_indoor",
+  "note": ""
+ },
+ "buHCMC": {
+  "value": "2.5",
+  "source": "prereg_score_test.json:H2d.medians.HCMC",
+  "note": ""
+ },
+ "buLo": {
+  "value": "1.1",
+  "source": "H2d medians min (non-HCMC)",
+  "note": ""
+ },
+ "buHi": {
+  "value": "1.6",
+  "source": "H2d medians max (non-HCMC)",
+  "note": ""
+ },
+ "threeHCMCmax": {
+  "value": "0.68",
+  "source": "prereg_score_test.json:H2e.HCMC_max",
+  "note": ""
+ },
+ "threeUppMax": {
+  "value": "7.0",
+  "source": "prereg_score_test.json:H2e.europe.Uppsala.max",
+  "note": ""
+ },
+ "kmeanInvLo": {
+  "value": "2.7",
+  "source": "numbers.json:baselines_ratio.C*/C_kansal_mean p50 max -> inverse",
+  "note": ""
+ },
+ "kmeanInvHi": {
+  "value": "4.5",
+  "source": "numbers.json:baselines_ratio.C*/C_kansal_mean p50 min -> inverse",
+  "note": ""
+ },
+ "nThr": {
+  "value": "4{,}686",
+  "source": "prereg_score_test.json:H5a.n",
+  "note": ""
+ },
+ "thrMedSigned": {
+  "value": "+0.0021",
+  "source": "prereg_score_test.json:H5a.median",
+  "note": ""
+ },
+ "naiveSharePct": {
+  "value": "99.1\\,\\%",
+  "source": "prereg_score_test.json:H5b.share_gt0",
+  "note": ""
+ },
+ "naiveMedSigned": {
+  "value": "+0.028",
+  "source": "prereg_score_test.json:H5b.median",
+  "note": ""
+ },
+ "nGate": {
+  "value": "3{,}000",
+  "source": "prereg_score_test.json:H6.n",
+  "note": ""
+ },
+ "nGateAgree": {
+  "value": "3{,}000",
+  "source": "prereg_score_test.json:H6.agree",
+  "note": ""
+ },
+ "epsKsixteen": {
+  "value": "0.655",
+  "source": "numbers.json:F_D_all.eps_star.16",
+  "note": ""
+ },
+ "ckWinter": {
+  "value": "2.3",
+  "source": "summary_test.json:main.F1 DJF, 1/median C*(16)/C*(8), Europe",
+  "note": ""
+ },
+ "ckHCMC": {
+  "value": "1.6",
+  "source": "summary_test.json:main.F1 DJF, 1/(C*(16)/C*(8)), HCMC",
+  "note": ""
+ },
+ "interpMax": {
+  "value": "0.17\\,\\%",
+  "source": "interp_sensitivity_test.json max |rel_diff_Cstar|",
+  "note": ""
+ },
+ "uppProdDiffMax": {
+  "value": "21\\,\\%",
+  "source": "F5_sizing_all.json Uppsala MSG/SARAH3 C* (m=0.25) max |ratio-1|",
+  "note": ""
+ },
+ "uppProdDiffMed": {
+  "value": "18\\,\\%",
+  "source": "same, median",
+  "note": ""
+ },
+ "blockNote": {
+  "value": "intervals for 7-, 14- and 30-day blocks in the supplement (7-day intervals exclude the estimate in 7 of 50 cells, 30-day in 0)",
+  "source": "sizing_block_sens_all.json:summary",
+  "note": ""
+ },
+ "Esection": {
+  "value": "\\subsection{Exploratory: what helps instead}\nA Kansal-style predictive duty cycle~\\cite{kansal2007} did beat blackout on TEST (median -0.015). We registered three follow-up predictions before running a dedicated post-test stage; all three failed, so the result is reported as an observation only (Figs.~\\ref{fig:q2} and~\\ref{fig:q2b}). The controller spends spilled energy (median mean activation 1.64 times that of blackout), but at equal mean activation it is indistinguishable from periodic operation (median difference -0.0008, with the predicted sign in only 56.6\\,\\% of cases and the opposite sign significant in 5 of 25 cells). Its gain is also far smaller than the difference of the two floors (median -0.098 predicted, $R^2=-4.5$ around the identity line), because it concentrates activations in daytime and still has outages, so it pays the Jensen gap of Corollary~\\ref{cor:jensen} and the outage term of Proposition~\\ref{prop:blackout}. A constant rate sized on the TRAIN months to never black out did worse than both (median +0.11 against blackout, better than both in 3.7\\,\\% of 3{,}007 cases). Theorem~\\ref{thm:energy} bounds schedules that never empty storage; on these traces, accepting short outages and spending the surplus is the better operating point.\n\\begin{figure}[!t]\\centering\\includegraphics[width=\\columnwidth]{figures/F6p_throttle_kansal_amax_test.pdf}\\caption{Miss relative to blackout against capacity (medians over the TEST cases in which periodic $K=8$ has outages). Exploratory (post-test) analysis.}\\label{fig:q2}\\end{figure}\n\\begin{figure}[!t]\\centering\\includegraphics[width=\\columnwidth]{figures/F7_kansal_obs_vs_pred_test.pdf}\\caption{Observed Kansal--blackout miss difference against the difference of the two floors (Theorem~\\ref{thm:floor}); points above the dashed line gain less than the floors suggest. Exploratory (post-test) analysis.}\\label{fig:q2b}\\end{figure}",
+  "source": "exploratory_q2_test.json / exploratory_q2_boot_test.json",
+  "note": ""
+ },
+ "EabstractSentence": {
+  "value": "a predictive controller that spends spilled energy misses fewer events (median -0.015), a post-test observation whose registered explanations were not confirmed.",
+  "source": "exploratory_q2_test.json / exploratory_q2_boot_test.json",
+  "note": ""
+ },
+ "repoURL": {
+  "value": "\\url{https://github.com/lamquocdat/harvest-certified-detection}",
+  "source": "repository (push and tag pending, CP-B2)",
+  "note": ""
+ },
+ "AIdisclosure": {
+  "value": "The author used an AI assistant (Claude, Anthropic) for code development, literature search and language editing; all results, code and text were checked by the author, who takes full responsibility.",
+  "source": "IEEE PSPB 8.2.1.B.10 disclosure",
+  "note": ""
+ }
+}

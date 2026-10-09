@@ -1,0 +1,92 @@
+[
+ {
+  "site": "HCMC",
+  "season": "SON",
+  "zoh": {
+   "Cstar_per8": 4915522.470959142,
+   "miss_per8_at_half": 0.5350350367429877,
+   "outage_at_half": 0.0413042410924751
+  },
+  "linear": {
+   "Cstar_per8": 4915831.442226455,
+   "miss_per8_at_half": 0.5350402614936656,
+   "outage_at_half": 0.0413150138317393
+  },
+  "rel_diff_Cstar": 6.285624145507818e-05
+ },
+ {
+  "site": "Madrid-MSG",
+  "season": "DJF",
+  "zoh": {
+   "Cstar_per8": 16067988.607040595,
+   "miss_per8_at_half": 0.5433528419284602,
+   "outage_at_half": 0.05845444634422803
+  },
+  "linear": {
+   "Cstar_per8": 16065113.277842015,
+   "miss_per8_at_half": 0.5433521013801936,
+   "outage_at_half": 0.05845291943244224
+  },
+  "rel_diff_Cstar": -0.0001789476747151575
+ },
+ {
+  "site": "Madrid-SARAH3",
+  "season": "JJA",
+  "zoh": {
+   "Cstar_per8": 2020721.9129941761,
+   "miss_per8_at_half": 0.5676421399013584,
+   "outage_at_half": 0.1085357401912811
+  },
+  "linear": {
+   "Cstar_per8": 2017282.982026916,
+   "miss_per8_at_half": 0.567366367023352,
+   "outage_at_half": 0.10796713328654894
+  },
+  "rel_diff_Cstar": -0.0017018328673263916
+ },
+ {
+  "site": "Uppsala-MSG",
+  "season": "DJF",
+  "zoh": {
+   "Cstar_per8": 42824597.02032374,
+   "miss_per8_at_half": 0.5896081250580503,
+   "outage_at_half": 0.15382667278635864
+  },
+  "linear": {
+   "Cstar_per8": 42820566.36435558,
+   "miss_per8_at_half": 0.5896157623622174,
+   "outage_at_half": 0.15384241988924374
+  },
+  "rel_diff_Cstar": -9.412011434095646e-05
+ },
+ {
+  "site": "Uppsala-SARAH3",
+  "season": "JJA",
+  "zoh": {
+   "Cstar_per8": 5724511.53221564,
+   "miss_per8_at_half": 0.5260736658455825,
+   "outage_at_half": 0.022827089151478575
+  },
+  "linear": {
+   "Cstar_per8": 5722061.639397949,
+   "miss_per8_at_half": 0.5260686475317862,
+   "outage_at_half": 0.02281674205753903
+  },
+  "rel_diff_Cstar": -0.0004279653912658832
+ },
+ {
+  "site": "HCMC",
+  "season": "MAM",
+  "zoh": {
+   "Cstar_per8": 2402177.9672278613,
+   "miss_per8_at_half": 0.5611137687994249,
+   "outage_at_half": 0.09507510942857433
+  },
+  "linear": {
+   "Cstar_per8": 2402251.377128303,
+   "miss_per8_at_half": 0.5610381660117482,
+   "outage_at_half": 0.0949192265607568
+  },
+  "rel_diff_Cstar": 3.055972598331458e-05
+ }
+]

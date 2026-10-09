@@ -1,0 +1,92 @@
+{
+ "split": "test",
+ "n_cells": 4686,
+ "metric": "replay miss (100k real events); analytic in *_analytic",
+ "E1": {
+  "d_K_minus_perabar": {
+   "median": -0.0008099999999999774,
+   "p05": -0.041669999999999985,
+   "p95": 0.05549750000000009,
+   "median_abs": 0.018585000000000018
+  },
+  "share_ge_-0.005": 0.5661545027742211,
+  "share_ge0": 0.48698250106700813,
+  "outage_perabar_minus_K": -0.05457625694850293,
+  "analytic_share_ge_-0.005": 0.5691421254801536
+ },
+ "E2": {
+  "d_obs_median": -0.01536000000000004,
+  "predictors": {
+   "T1_both_abar (primary)": {
+    "R2_45": -4.468231747764923,
+    "pearson_r2": 0.49065385004540585,
+    "median_pred": -0.0979318081863107,
+    "median_resid": 0.08854855624322328
+   },
+   "literal_eps(aK)-eps(1/8)": {
+    "R2_45": -1.843835425742523,
+    "pearson_r2": 0.44511314773324295,
+    "median_pred": -0.04976943969207348,
+    "median_resid": 0.03201183410415215
+   },
+   "floorK_minus_P2floor": {
+    "R2_45": -11.09825134443917,
+    "pearson_r2": 0.309795956690883,
+    "median_pred": -0.1444936101352975,
+    "median_resid": 0.13422315405048313
+   }
+  },
+  "a_bar_K_over_blk_median": 1.6388575189746526
+ },
+ "E3": {
+  "n_feasible": 3007,
+  "n_excluded_amax0": 1679,
+  "per_amax_d0": {
+   "share_le_K": 0.05487196541403392,
+   "share_le_blk": 0.1000997672098437,
+   "share_le_both": 0.03658131027602261,
+   "share_outage_gt0": 0.5034918523445294,
+   "median_outage": 0.0004610384069737572,
+   "median_minus_K": 0.12541999999999998,
+   "median_minus_blk": 0.10958999999999997
+  },
+  "per_amax_d5": {
+   "share_le_K": 0.036248752909876954,
+   "share_le_blk": 0.07748586631193881,
+   "share_le_both": 0.020951114067176587,
+   "share_outage_gt0": 0.4556035916195544,
+   "median_outage": 0.0,
+   "median_minus_K": 0.13397000000000003,
+   "median_minus_blk": 0.11843999999999988
+  },
+  "per_amax_d10": {
+   "share_le_K": 0.02228134353175923,
+   "share_le_blk": 0.061855670103092786,
+   "share_le_both": 0.012637179913535085,
+   "share_outage_gt0": 0.4127036913867642,
+   "median_outage": 0.0,
+   "median_minus_K": 0.14275000000000004,
+   "median_minus_blk": 0.12624000000000013
+  }
+ },
+ "bands": {
+  "0-0.1": {
+   "n": 1038,
+   "K_minus_blk": 0.0012050000000000116,
+   "K_minus_perabar": 0.002705000000000013,
+   "amax0_minus_blk": 0.25683999999999996
+  },
+  "0.1-0.5": {
+   "n": 2478,
+   "K_minus_blk": -0.019755000000000023,
+   "K_minus_perabar": -0.0071850000000000525,
+   "amax0_minus_blk": 0.21431499999999992
+  },
+  "0.5-1.01": {
+   "n": 1170,
+   "K_minus_blk": -0.029919999999999947,
+   "K_minus_perabar": 0.0063549999999999995,
+   "amax0_minus_blk": 0.05225999999999997
+  }
+ }
+}
