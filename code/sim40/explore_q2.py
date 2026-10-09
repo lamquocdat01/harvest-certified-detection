@@ -168,7 +168,11 @@ def boot(B=cfg.B_BOOT):
                 continue
             v = miss(law, x) - miss(law, y)
             vb = [miss(L, x) - miss(L, y) for L in laws]
-            rec[name] = {"d": v, "ci": ci(vb), "p_wrong_sign": boot_p_sign(vb, sgn)}
+            # boot_p_sign(vb, s) is the p-value of H0 'sign is not s' (share of resamples against s), so the
+            # p-value for a significant WRONG sign is boot_p_sign(vb, -sgn). (Fix 10-10-2026: the first run used
+            # boot_p_sign(vb, sgn), i.e. it counted significant PREDICTED signs; kept as *.buggy_holm_direction.json)
+            rec[name] = {"d": v, "ci": ci(vb), "p_wrong_sign": boot_p_sign(vb, -sgn),
+                         "p_predicted_sign": boot_p_sign(vb, sgn)}
         cells.append(rec)
         print(site, sea, {k: (round(rec[k]["d"], 4) if rec[k] else None) for k in diffs}, flush=True)
     out = {"split": SPLIT, "B": B, **BOOT_SEL, "cells": cells}
@@ -176,8 +180,10 @@ def boot(B=cfg.B_BOOT):
         # Holm over the 25 cells of each family: H0 'predicted sign holds'; a rejection = significant WRONG sign
         cc = [c for c in cells if c[name] is not None]
         rej = holm([c[name]["p_wrong_sign"] for c in cc]) if cc else np.zeros(0, bool)
+        rp = holm([c[name]["p_predicted_sign"] for c in cc]) if cc else np.zeros(0, bool)
         out[f"holm_{name}"] = {"n": len(cc), "n_sig_wrong_sign": int(rej.sum()),
-                               "cells": [f"{c['site']} {c['season']}" for c, x in zip(cc, rej) if x]}
+                               "cells": [f"{c['site']} {c['season']}" for c, x in zip(cc, rej) if x],
+                               "n_sig_predicted_sign": int(rp.sum())}
     (cfg.RES / f"exploratory_q2_boot_{SPLIT}.json").write_text(json.dumps(out, indent=1, default=float))
     return out
 
