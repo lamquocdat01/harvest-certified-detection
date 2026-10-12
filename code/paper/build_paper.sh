@@ -6,6 +6,8 @@ HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(cd "$HERE/../.." && pwd)"
 LATEX="$ROOT/submission_package/IoTJ/latex"
 FINAL="${1:-}"
+# fixed timestamps -> byte-reproducible figure PDFs (matplotlib) and LaTeX PDFs (pdfTeX); 2026-10-12 00:00 UTC
+export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-1791763200}" FORCE_SOURCE_DATE=1
 echo "### 1/6 numbers.tex";  python "$HERE/gen_numbers.py"
 echo "### 2/6 figures";      python "$HERE/gen_figures.py"
 echo "### 3/6 refs.bib";     python "$HERE/make_bib.py" > "$ROOT/results/log_make_bib.txt"; tail -1 "$ROOT/results/log_make_bib.txt"
