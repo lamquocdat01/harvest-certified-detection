@@ -39,10 +39,12 @@ def pages(pdf):
 
 
 def main():
-    if PKG.exists():
-        shutil.rmtree(PKG)
     flat = PKG / "source_flat"
-    flat.mkdir(parents=True)
+    if PKG.exists():                    # clear files only: the synced folder (Google Drive) may hold a lock on dirs
+        for p in sorted(PKG.rglob("*"), reverse=True):
+            if p.is_file():
+                p.unlink()
+    flat.mkdir(parents=True, exist_ok=True)
     main_src = (LATEX / "main.tex").read_text(encoding="utf-8")
     nums = (LATEX / "numbers.tex").read_text(encoding="utf-8")
     order = []

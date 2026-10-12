@@ -67,6 +67,11 @@ LTWA = {
     "IEEE Transactions on Sustainable Computing": "IEEE Trans. Sustain. Comput.",
     "ACM Transactions on Internet of Things": "ACM Trans. Internet Things",
     "Proceedings of the IEEE": "Proc. IEEE",
+    "Frontiers in Energy Research": "Front. Energy Res.",
+    "IEEE Communications Letters": "IEEE Commun. Lett.",
+    "IEEE Transactions on Signal Processing": "IEEE Trans. Signal Process.",
+    "International Journal of Distributed Sensor Networks": "Int. J. Distrib. Sens. Netw.",
+    "Methodology and Computing in Applied Probability": "Methodol. Comput. Appl. Probab.",
 }
 DATASETS = {"enhants2011dataset", "pfeifroth2023sarah3"}
 UNABBREVIATED: set[str] = set()
@@ -129,6 +134,19 @@ DOI_REFS = {
     "deepak2026mcap": "10.1007/s11009-026-10314-6",
     "ballestrin2026cl": "10.1109/LCOMM.2026.3671672",
     "kuaban2025sensors": "10.3390/s25103137",
+    # FGCS build only (P7/DOSSIER_FGCS_40.md): FGCS precedents and research-gap references, DOIs verified
+    "chen2025fgcs": "10.1016/j.future.2024.107493",
+    "prauzek2025fgcs": "10.1016/j.future.2025.107717",
+    "landre2025fgcs": "10.1016/j.future.2025.107710",
+    "kazem2026fgcs": "10.1016/j.future.2026.108737",
+    "gurung2025ijdsn": "10.1155/dsn/4253030",
+    "gerndt2025sensors": "10.3390/s25144500",
+    "landivar2025pimrc": "10.1109/PIMRC62392.2025.11275074",
+    "kuaban2024fenrg": "10.3389/fenrg.2024.1399371",
+    "naha2024tsp": "10.1109/TSP.2024.3350340",
+    "williams2024react": "10.1145/3620666.3651370",
+    "liedtke2026estacker": "10.1145/3772371",
+    "alsubhi2024stash": "10.1145/3641511",
 }
 
 # Deep3 (doc 11721175): the author confirmed on 12-10-2026 that IEEE typeset and index the paper with
@@ -137,6 +155,9 @@ AUTHOR_CHECK: set[str] = set()
 
 # Corrections of Crossref metadata errors (each one justified; recorded in bib_generation.json)
 OVERRIDES = {
+    "deepak2026mcap": {"authors": "P, Nikhil A. and Deepak, T. G.", "family": "P",
+                       "why": "Crossref given name 'T.G.' has no space, so the styles print 'T. Deepak'; initials "
+                              "spaced, names otherwise as in Crossref (first author's family name is 'P')"},
     "daley2003pp1": {"authors": "Daley, D. J. and Vere-Jones, D.", "family": "Daley",
                      "why": "Crossref book record (10.1007/b97277) has no author field; authors from the title page"},
 }
@@ -156,7 +177,7 @@ ACC = {"á": r"\'{a}", "à": r"\`{a}", "ä": r'\"{a}', "â": r"\^{a}", "å": r"\
        "ë": r'\"{e}', "ê": r"\^{e}", "í": r"\'{i}", "ï": r'\"{i}', "î": r"\^{i}", "ó": r"\'{o}", "ö": r'\"{o}',
        "ô": r"\^{o}", "ø": r"{\o}", "ú": r"\'{u}", "ü": r'\"{u}', "ñ": r"\~{n}", "ç": r"\c{c}", "ß": r"{\ss}",
        "Á": r"\'{A}", "É": r"\'{E}", "Ö": r'\"{O}', "Ü": r'\"{U}', "ğ": r"\u{g}", "ı": r"{\i}", "ş": r"\c{s}",
-       "–": "--", "—": "---", "’": "'", "‘": "`", "“": "``", "”": "''", "×": r"$\times$", "−": "-",
+       "–": "--", "—": "---", "‐": "-", "‑": "-", "’": "'", "‘": "`", "“": "``", "”": "''", "×": r"$\times$", "−": "-",
        "μ": r"$\mu$", "µ": r"$\mu$"}
 
 

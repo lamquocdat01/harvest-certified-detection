@@ -1,0 +1,41 @@
+\documentclass[10pt]{article}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx,booktabs,array,url}
+\usepackage[hidelinks]{hyperref}
+\input{numbers.tex}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\lt}{\tilde{\ell}}
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\title{Supplementary Material for\\``Miss Floors and Storage Sizing for Energy-Harvesting Sensing Nodes Under Heavy-Tailed Events''}
+\author{Dat Lam Quoc}
+\date{}
+\begin{document}
+\maketitle
+Numbering of results follows the main paper, which contains all proofs. All numbers in the tables are generated from the result files of the repository (\repoURL, tag \texttt{v1.1.0-fgcs}); file names are given in each caption.
+
+\section{Machine checks and simulation details}
+\textbf{Theorem 1.} Machine checks: 10{,}000 random oblivious schedules (periodic, Bernoulli, burst, diurnal) against the real $F_D$, no violation; periodic $K=1,\dots,64$ and five non-integer periods attain the floor to $10^{-12}$; a schedule with gaps $\{3,17\}$ is strictly above it. Interleaved (Bresenham) schedules attain $\eps^*(a)$ for every $a$ with $aT\in\mathbb{N}$.
+
+\textbf{Lemma 2.} The simulator uses 1-min sub-steps of $n=600$ slots, with constant harvest and rate inside a sub-step, where storage is monotone, so every constraint is checked exactly at sub-step boundaries. The granularity of one activation (cost $r-1$ at once) is covered by adding $r-1$ to fluid storage needs; checked against slot-level simulation at 10\,fps.
+
+\textbf{Lemma 3.} At slot level with integer activations, the greedy schedule equals exhaustive search over $\{0,1\}^T$ ($T\le14$) in 150 random cases.
+
+\textbf{Theorem 3.} The taut-string capacity $C_{\mathrm{TS}}$ is found by bisection with relative tolerance 0.01; the pre-registered check H4b allows $C_{\mathrm{LB}}/C_{\mathrm{TS}}\le1.02$ for this reason.
+
+\section{Throttling (pre-registered stage)}
+\begin{figure}[!ht]\centering
+\includegraphics[width=0.6\textwidth]{figures/F6_throttle_vs_blackout_test.pdf}
+\caption{Miss relative to blackout (periodic $K=8$) for two throttling variants and the Kansal-style controller ($r=15$, $\lt=0.04$, $m=0.25$; TEST; medians per capacity bin).}
+\end{figure}
+
+\section{Tables}
+\input{supp_tables.tex}
+
+\section{Pre-registration and code}
+PREREG v1 (H1--H7) is frozen by SHA-256 and the git tag \texttt{prereg-40-v1}; the exploratory appendix v1.1 (E1--E3) is a separate commit registered after TEST and before the exploratory stage was run. A post-run fix of the direction of the Holm wrong-sign test in the exploratory bootstrap is a separate commit; verdicts did not change. TRAIN was explored with an earlier two-pass cyclic simulation; the frozen code iterates to the cyclic steady state, which affects only policies in energy deficit.
+\end{document}

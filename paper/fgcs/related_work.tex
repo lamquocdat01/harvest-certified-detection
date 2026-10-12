@@ -1,0 +1,42 @@
+% related_work.tex (FGCS build): hand-written prose, no measured numbers. Every statement about a cited work is
+% from its full text or, for works marked a in Table 1, from its abstract (P7/DOSSIER_FGCS_40.md, P6/KUABAN_40.md,
+% P7/LIT_SWEEP_40.md, P1/DOSSIER_IOTJ_40.md).
+Table~\ref{tab:related} positions the paper against the closest works along the dimensions that matter for provisioning a harvesting sensing node. We group the literature into three gaps.
+
+\subsection{Sizing harvesting nodes targets continuity, not a miss rate}
+The storage condition for a node that never empties its storage is classical: Moser et al.~\cite{moser2007rts} give it for energy curves, and Kansal et al.~\cite{kansal2007} give the energy-neutral sizing condition for a $(\rho,\sigma)$ harvest envelope. Prediction-based duty cycling~\cite{buchli2014sensys,renner2014tosn} and capacitor-centred designs~\cite{jackson2019ipsn} address operation rather than the event-miss trade-off. Recent design practice keeps the same objective. Kuaban~\cite{kuaban2025iwcmc} dimensions the harvester and storage of a solar-powered IoT node to maintain energy balance, using time-varying models and simulation; it does not consider event miss or event durations. A companion journal paper sizes the panel from peak sun hours with a tolerance factor and a design margin and sizes the battery from an autonomy target~\cite{kuaban2025sensors}, and a model of energy packets dimensions the harvester so that a node runs for several years without running out of energy~\cite{kuaban2024fenrg}. Field designs choose supercapacitors by days of autonomy~\cite{gurung2025ijdsn}, adapt the duty cycle to solar forecasts so that operation is continuous~\cite{gerndt2025sensors}, or size batteryless nodes by an energy-conservation inequality under constant illumination~\cite{landivar2025pimrc}. In this journal, Prauzek et al.~\cite{prauzek2025fgcs} tune fuzzy energy-management controllers for harvesting IoT nodes on several years of solar data, and Chen et al.~\cite{chen2025fgcs} allocate harvested energy optimally over a finite horizon in a linear sensor network, evaluated on a real renewable-energy data set. None of these sizes storage for a target miss probability of events; our Theorem~\ref{thm:sizing} generalises the zero-violation case to a miss target $\eps>0$ and Section~\ref{sec:eval} measures how far the continuity-oriented rules are from it.
+
+\subsection{Event-capture analysis assumes stochastic recharge and point events}
+Kar et al.~\cite{kar2006ton} bound network-wide capture under stochastic recharge with the concavity argument of Corollary~\ref{cor:jensen}. Jaggi et al.~\cite{jaggi2009wn,jaggi2008tosn} and Ren et al.~\cite{ren2014tpds,ren2015p2p} derive activation policies for correlated or renewal events; their capacity results are asymptotic or algorithmic. Quality of monitoring~\cite{yau2010tosn,he2012tpds} and patrolling~\cite{lin2013opre} supply the gap decomposition without energy. Quickest change detection with randomly available energy~\cite{naha2024tsp} and learned wake-up policies for event reporting~\cite{ruizguirola2026iotj} also model the harvest as a random process. Closed forms with finite storage exist for point arrivals under stochastic recharge: the energy-outage probability with Bernoulli energy arrivals~\cite{ballestrin2026cl}, blocking and depletion probabilities of a finite fluid queue~\cite{deepak2026mcap}, service-outage probabilities in a Poisson energy-packet model~\cite{kuaban2024fenrg}, and energy-depletion bounds under storage constraints~\cite{yan2024iotj}. We know of no closed-form finite-capacity floor for events with duration (Table~\ref{tab:related}; for the works marked $^{a}$ only the abstract was available to us).
+
+\subsection{Offline-optimal harvesting schedules optimise throughput}
+Offline-optimal transmission with a finite battery~\cite{tutuncuoglu2012twc,yang2012tcom,ozel2011jsac} and stochastic policies~\cite{sharma2010twc,srivastava2013ton} maximise throughput or utility, not the miss of events. We use the energy-tunnel construction of~\cite{tutuncuoglu2012twc} as the upper bound $C_{\mathrm{TS}}$ in Theorem~\ref{thm:sizing}, and recent IoT work bounds age of information~\cite{lei2025iotj,botirov2026iotj} under stochastic models.
+
+\subsection{Intermittent systems and edge infrastructure are evaluated, not certified}
+Batteryless cameras and intermittent platforms~\cite{desai2022camaroptera,hester2017mayfly,lee2026nowornever} show the hardware side. REACT~\cite{williams2024react} argues that a fixed energy buffer chosen at design time is a poor fit and that buffer dynamics are hard to predict at design time; it is evaluated on the same EnHANTs light traces we use. Flexible storage~\cite{alsubhi2024stash} and emulation platforms~\cite{liedtke2026estacker} evaluate coverage and performance over recorded solar and event traces, and self-sustainability studies use measured indoor-light traces~\cite{mayer2024iotj,kim2024iotj}. At infrastructure scale, Landr\'e et al.~\cite{landre2025fgcs} compute the minimum power demand for a renewable-powered datacenter under a quality-of-service constraint, and Kazem et al.~\cite{kazem2026fgcs} consolidate solar- and battery-powered edge clusters. These works evaluate a design on traces; our certificates bound every event-independent design before it is built, and the traces are used to check the bounds.
+
+\begin{table*}[!t]\centering
+\caption{Positioning (\checkmark: yes; $\circ$: partly; --: no). Read from full text unless marked $^{a}$ (abstract only; for these rows -- means not stated in the abstract).}\label{tab:related}
+\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lccccccl@{}}\toprule
+Work & Energy & Events with & Finite & Closed-form & Sizing for & Real & Objective\\
+ & model & duration & $C$ & bound & a target & traces & \\\midrule
+Moser et al.~\cite{moser2007rts} & det.\ curve & -- & \checkmark & \checkmark & $\eps=0$ only & \checkmark & deadlines\\
+Kansal et al.~\cite{kansal2007} & $(\rho,\sigma)$ envelope & -- & \checkmark & \checkmark & $\eps=0$ only & \checkmark & neutrality\\
+Buchli et al.~\cite{buchli2014sensys} & daily prediction & -- & \checkmark & -- & \checkmark & \checkmark & continuity\\
+Kuaban~\cite{kuaban2025iwcmc}$^{a}$ & time-varying model & -- & \checkmark & -- & $\circ$ & -- & energy balance\\
+Prauzek et al.~\cite{prauzek2025fgcs}$^{a}$ & measured & -- & -- & -- & -- & \checkmark & transmissions\\
+Chen et al.~\cite{chen2025fgcs}$^{a}$ & measured & -- & -- & $\circ$ & -- & \checkmark & throughput\\
+Kar et al.~\cite{kar2006ton} & stochastic & -- & $\circ$ & \checkmark & -- & -- & capture (network)\\
+Jaggi et al.~\cite{jaggi2009wn}$^{a}$ & stochastic & $\circ$ & asymptotic & $\circ$ & -- & -- & event capture\\
+Ren and Cheng~\cite{ren2015p2p}$^{a}$ & stochastic & \checkmark & \checkmark & -- & -- & -- & event capture\\
+Yau et al.~\cite{yau2010tosn} & none & \checkmark & -- & \checkmark & -- & -- & monitoring\\
+Ballestrin and M\"uller~\cite{ballestrin2026cl}$^{a}$ & stochastic & -- & \checkmark & \checkmark & -- & -- & energy outage\\
+P and Deepak~\cite{deepak2026mcap}$^{a}$ & stochastic & -- & \checkmark & \checkmark & -- & -- & blocking, depletion\\
+Yan et al.~\cite{yan2024iotj}$^{a}$ & stochastic & -- & \checkmark & \checkmark & $\circ$ & -- & throughput\\
+Tutuncuoglu and Yener~\cite{tutuncuoglu2012twc} & deterministic & -- & \checkmark & offline optimum & -- & -- & throughput\\
+REACT~\cite{williams2024react} & measured & -- & \checkmark & -- & -- & \checkmark & buffer adaptation\\
+Mayer et al.~\cite{mayer2024iotj} & measured & $\circ$ & \checkmark & -- & -- & \checkmark & sustainability\\
+This work & det.\ trace & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & event miss\\\bottomrule
+\end{tabular}
+\end{table*}

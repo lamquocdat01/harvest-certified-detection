@@ -1,0 +1,5 @@
+A closed-form miss floor holds for every event-independent duty cycle
+The floor is tight for every duration law iff activation gaps differ by at most one
+An energy floor and a sizing sandwich give storage for a target miss rate
+Periodic duty cycling needs 2.5-5.2x the storage of the miss-optimal schedule
+Pre-registered traces: 0 of 635,646 floor checks violated; artifact open

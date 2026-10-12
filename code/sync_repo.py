@@ -11,7 +11,7 @@ import shutil
 TOPIC = pathlib.Path(__file__).resolve().parents[1]
 REPO = pathlib.Path(r"D:\Repos\harvest-certified-detection")
 RELEASE = {
-    "code": ["sim40/*.py", "sim40/tests/*.py", "paper/*.py", "paper/build_paper.sh", "reproduce.sh",
+    "code": ["sim40/*.py", "sim40/tests/*.py", "paper/*.py", "paper/*.sh", "reproduce.sh",
              "compare_results.py", "sync_repo.py"],
     "results": ["summary_test.json", "numbers.json", "prereg_score_test.json", "boot_test.json",
                 "F5_sizing_test.json", "F5_sizing_all.json", "exploratory_q2_test.json",
@@ -20,8 +20,10 @@ RELEASE = {
                 "corpus_rebuild_check.json", "event_corpus_40.csv", "numbers_provenance.json",
                 "figure_provenance.json", "figs/*_test.pdf", "figs/*_test.png", "figs/F2_caption_test.txt"],
     "P1": ["PREREG_40.md", "PREREG_40.sha256", "PREREG_40_v1.1_exploratory.md", "PREREG_40_v1.1_exploratory.sha256"],
+    # FGCS manuscript sources (P7; generated tables/numbers are rebuilt by code/paper/build_fgcs.sh)
+    "submission_package/FGCS/latex": ["main.tex", "related_work.tex", "supp.tex", "highlights.txt"],
 }
-DEST = {"code": "code", "results": "results", "P1": "prereg"}
+DEST = {"code": "code", "results": "results", "P1": "prereg", "submission_package/FGCS/latex": "paper/fgcs"}
 
 
 def sha(p):
