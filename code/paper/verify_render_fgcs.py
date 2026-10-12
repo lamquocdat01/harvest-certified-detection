@@ -13,7 +13,9 @@ Hard in both modes unless stated:
   R7  keywords 6..10 (FGCS); highlights 3..5 bullets, each <= 85 characters
   R8  pages <= 18 (pdfinfo; FGCS full-length limit), overfull boxes <= 5 pt, figure hashes = results hashes
   R9  back matter: CRediT, competing interest, funding, AI declaration (Elsevier title) and data availability present,
-      all before References; e-mail + ORCID on page 1; repository URL lamquocdat01 + tag v1.1.0-fgcs on main
+      all before References; e-mail + ORCID on page 1; repository URL lamquocdat01 + tag v1.1.1-fgcs on main
+  R11 author-bio rule (P8): no 'PhD researcher|Ph.D. candidate|PhD candidate|Director|Suntory' on main.pdf,
+      cover letter or highlights
   R10 Deep3 renders as 'L. Q. Dat' with its DOI; no table/figure caption after References
 Writes results/verify_render_fgcs.json. Exit 1 on any failure.
 """
@@ -31,10 +33,10 @@ LATEX = ROOT / "submission_package" / "FGCS" / "latex"
 PDF = LATEX / "main.pdf"
 MAX_PAGES, MAX_ABS, MIN_ABS, MAX_TITLE = 18, 250, 150, 15
 KW_MIN, KW_MAX, HL_MIN, HL_MAX, HL_CHARS = 6, 7, 3, 5, 85   # keywords: 2024 Guide 1-7, 2026 reading 6-10
-TAG = "v1.1.0-fgcs"
+TAG = "v1.1.1-fgcs"
 CONSTANTS = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "16", "19", "20", "23", "25", "30", "32", "64",
              "100", "300", "0.01", "0.02", "0.2", "0.03", "0.036", "0.04", "0.05", "0.1", "0.25", "0.248", "0.45",
-             "0.5", "0.6", "1.1", "14", "14.3", "15", "256", "1000", "2025", "2014", "1.1.0", "4.0"}
+             "0.5", "0.6", "1.1", "14", "14.3", "15", "256", "1000", "2025", "2014", "1.1.0", "1.1.1", "4.0"}
 TONE = r"\b(novel|first-ever|significantly|guarantee[sd]?|superior|unprecedented|groundbreaking)\b"
 FORBIDDEN = r"\b(IoT-J|IEEE Internet of Things Journal|8 pages|eight pages|T30|IoT-73792|SUSCOM|JNCA|NSRDB)\b"
 AI_TITLE = "Declaration of generative AI and AI-assisted technologies in the manuscript preparation process"
@@ -188,6 +190,14 @@ def main(final):
     res["floats_after_references"] = after
     if after:
         fail.append(f"R10 floats after References: {after}")
+    # R11 author-bio rule (Vitae / signature / highlights)
+    BIO = r"PhD researcher|Ph\.D\. candidate|PhD candidate|Director|Suntory"
+    bio = {n: re.findall(BIO, re.sub(r"\s+", " ", t)) for n, t in
+           (("main", T), ("cover_letter", texts["cover_letter"]),
+            ("highlights", (LATEX / "highlights.txt").read_text(encoding="ascii")))}
+    res["bio_forbidden"] = bio
+    if any(bio.values()):
+        fail.append(f"R11 forbidden bio strings: {bio}")
     res["failures"], res["final"] = fail, final
     (ROOT / "results" / "verify_render_fgcs.json").write_text(json.dumps(res, indent=1, ensure_ascii=False),
                                                               encoding="utf-8")
