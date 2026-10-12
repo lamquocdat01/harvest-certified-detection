@@ -154,7 +154,9 @@ def table(SC):
          r"their outcome on TEST. Criteria are abridged from the frozen text with every threshold kept; theorem "
          r"numbers refer to this paper. Scalar details are in the supplement}\label{tab:prereg}",
          r"\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.05}",
-         r"\begin{tabular}{@{}lp{0.50\textwidth}p{0.335\textwidth}l@{}}\toprule",
+         # column widths overridable per template (\preregCritW, \preregObsW); defaults = IoT-J layout
+         r"\providecommand{\preregCritW}{0.50\textwidth}\providecommand{\preregObsW}{0.335\textwidth}",
+         r"\begin{tabular}{@{}lp{\preregCritW}p{\preregObsW}l@{}}\toprule",
          r"\# & Pass criterion (abridged) & Observed on TEST & Outcome\\\midrule"]
     for k in keys:
         v = SC[k]["verdict"]
