@@ -70,7 +70,7 @@
   "note": ""
  },
  "Ftwocaption": {
-  "value": "Violations beyond the family-wise margin: Theorem~\ref{thm:floor}: 0 of 327{,}802; Proposition~\ref{prop:blackout}: 0 of 192{,}205; Theorem~\ref{thm:energy}: 0 of 115{,}639.",
+  "value": "Violations beyond the family-wise margin: Theorem~\\ref{thm:floor}: 0 of 327{,}802; Proposition~\\ref{prop:blackout}: 0 of 192{,}205; Theorem~\\ref{thm:energy}: 0 of 115{,}639.",
   "source": "summary_test.json:main.F2 (viol_familywise, n)",
   "note": ""
  },
@@ -310,8 +310,8 @@
   "note": ""
  },
  "repoURL": {
-  "value": "\\url{https://github.com/lamquocdat/harvest-certified-detection}",
-  "source": "repository (push and tag pending, CP-B2)",
+  "value": "\\url{https://github.com/lamquocdat01/harvest-certified-detection}",
+  "source": "repository, tag v1.0.0-submission (public handle lamquocdat01)",
   "note": ""
  },
  "AIdisclosure": {

@@ -72,16 +72,14 @@ DOI_REFS = {
     "deep3_jiot2026": "10.1109/jiot.2026.3740931",
 }
 
-# Deep3 metadata: the author has not yet confirmed the Xplore record (doc 11721175) -> flagged, not blocking
-AUTHOR_CHECK = {"deep3_jiot2026"}
+# Deep3 (doc 11721175): the author confirmed on 12-10-2026 that IEEE typeset and index the paper with
+# family = "Dat", given = "Lam Quoc"; Crossref matches Xplore, so no override and no AUTHOR-CHECK flag.
+AUTHOR_CHECK: set[str] = set()
 
 # Corrections of Crossref metadata errors (each one justified; recorded in bib_generation.json)
 OVERRIDES = {
     "daley2003pp1": {"authors": "Daley, D. J. and Vere-Jones, D.", "family": "Daley",
                      "why": "Crossref book record (10.1007/b97277) has no author field; authors from the title page"},
-    "deep3_jiot2026": {"authors": "{Lam Quoc}, Dat", "family": "Lam Quoc",
-                       "why": "Crossref swaps given/family (given 'Lam Quoc', family 'Dat'); the author's name is "
-                              "Dat Lam Quoc (ORCID 0009-0004-5432-9343). Pending the author's Crossref fix"},
 }
 
 MANUAL = {
@@ -136,11 +134,15 @@ def crossref(doi):
         au.append(a)
     typ = {"journal-article": "article", "proceedings-article": "inproceedings",
            "book-chapter": "incollection", "book": "book", "monograph": "book"}.get(m.get("type"), "misc")
-    return {"type": typ, "title": clean((m.get("title") or [""])[0]),
+    pages = (m.get("page") or "").replace("-", "--")
+    early = typ == "article" and not m.get("volume") and pages in ("", "1--1")
+    if early:                       # IEEE early access: Crossref prints the placeholder page '1-1'
+        pages, yr = "", f"early access, {yr}"
+    return {"type": typ, "title": clean((m.get("title") or [""])[0]), "early_access": early,
             "authors": " and ".join(f"{clean(a['family'])}, {clean(a.get('given', ''))}".strip(", ") for a in au),
             "family": clean(au[0]["family"]) if au else "",
             "container": clean((m.get("container-title") or [""])[0]), "year": yr,
-            "volume": m.get("volume"), "number": m.get("issue"), "pages": (m.get("page") or "").replace("-", "--"),
+            "volume": m.get("volume"), "number": m.get("issue"), "pages": pages,
             "publisher": clean(m.get("publisher", "")), "doi": m.get("DOI"), "src": "crossref"}
 
 
@@ -205,7 +207,8 @@ def main():
             rep.setdefault("overrides", {})[key] = o["why"]
         lines.append(entry(key, r, flag))
         rep["entries"][key] = {"doi": r["doi"], "year": r["year"], "family": r["family"], "title": r["title"],
-                               "container": r["container"], "src": r["src"]}
+                               "container": r["container"], "src": r["src"],
+                               "early_access": bool(r.get("early_access"))}
         if flag:
             rep["author_check"].append(key)
         print(f"ok   {key:24} {r['year']} {r['family'][:16]:16} {r['title'][:60]}")

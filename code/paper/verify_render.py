@@ -6,6 +6,9 @@ entry) and first-author family on the page, every literal number in main.tex is 
 model constant, no raw \\commands in the PDF text, tone words, forbidden venue/data names, title <= 15 words,
 abstract <= 250 words, first abstract sentence contains the community keyword and does not open with 'theorem',
 pages <= 8 (pdfinfo), no overfull box > 5 pt, figure hashes = results hashes.
+P5 (hard in both modes): no AUTHOR-CHECK and the lamquocdat01 repository URL on all three PDFs, AI disclosure in an
+Acknowledgment right before References (not in the page-1 footnote), e-mail + ORCID in the page-1 footnote,
+ref. Deep3 rendered as 'L. Q. Dat' with its DOI, no table/figure caption after References.
 Writes results/verify_render.json. Exit code 1 on any failure.
 """
 from __future__ import annotations
@@ -138,6 +141,46 @@ def main(final):
     res["figures_used"] = sorted(set(used))
     if badfig:
         fail.append(f"figure provenance mismatch: {badfig}")
+    # 8 P5 checks (CP-B2 Q6, C10, C7): hard in both modes
+    p5 = {}
+    for n in ("main", "supp", "cover_letter"):
+        t = text_of(LATEX / f"{n}.pdf")
+        p5[f"author_check_{n}"] = t.count("AUTHOR-CHECK")
+        p5[f"old_repo_url_{n}"] = len(re.findall(r"github\.com/lamquocdat/", t))
+        p5[f"repo_url_ok_{n}"] = "github.com/lamquocdat01/harvest-certified-detection" in re.sub(r"\s+", "", t)
+        # a '\r' swallowed by a non-raw Python string prints '\ref{thm:x}' as 'efthm:x' (P4 Fig. 1 caption bug)
+        p5[f"broken_ref_{n}"] = re.findall(r"ef\{?(?:thm|prop|lem|cor|fig|tab|sec):\w+", t)
+        if p5[f"broken_ref_{n}"]:
+            fail.append(f"broken \\ref on {n}.pdf: {p5[f'broken_ref_{n}'][:3]}")
+    for n in ("main", "supp", "cover_letter"):
+        if p5[f"author_check_{n}"]:
+            fail.append(f"AUTHOR-CHECK on {n}.pdf ({p5[f'author_check_{n}']}x)")
+        if p5[f"old_repo_url_{n}"] or not p5[f"repo_url_ok_{n}"]:
+            fail.append(f"repository URL on {n}.pdf is not github.com/lamquocdat01/harvest-certified-detection")
+    ia, ir = flat.find("ACKNOWLEDGMENT"), flat.rfind("REFERENCES")
+    p5["acknowledgment_before_references"] = 0 <= ia < ir
+    p5["ai_disclosure_in_acknowledgment"] = "used an AI assistant" in flat[ia:ir] if ia >= 0 else False
+    if not (p5["acknowledgment_before_references"] and p5["ai_disclosure_in_acknowledgment"]):
+        fail.append("AI disclosure must sit in an Acknowledgment section right before References")
+    page1 = re.sub(r"\s+", " ", subprocess.run(["pdftotext", "-f", "1", "-l", "1", str(PDF), "-"], capture_output=True,
+                                               text=True, encoding="utf-8", errors="replace").stdout)
+    p5["email_in_footnote"] = "e-mail: lamquocdat@gmail.com" in page1 and "ORCID" in page1
+    p5["ai_not_on_page1_footnote"] = "used an AI assistant" not in page1
+    if not (p5["email_in_footnote"] and p5["ai_not_on_page1_footnote"]):
+        fail.append("page-1 footnote must hold e-mail + ORCID and no AI disclosure")
+    deep3_no = [k for k, v in entries.items() if "jiot.2026.3740931" in v.lower()]
+    cl_refs = re.findall(r"\[(\d+)\]", text_of(LATEX / "cover_letter.pdf"))
+    p5["deep3_number"], p5["cover_letter_cites"] = (deep3_no[0] if deep3_no else None), cl_refs
+    if any(int(n) != p5["deep3_number"] for n in cl_refs):
+        fail.append(f"cover letter cites {cl_refs} but Deep3 is [{p5['deep3_number']}] in the paper")
+    deep3 = [v for v in entries.values() if "jiot.2026.3740931" in v.lower()]
+    p5["deep3_entry"] = deep3[0] if deep3 else None
+    if not deep3 or not re.search(r"L\.\s*Q\.\s*Dat", deep3[0]) or "doi" not in deep3[0].lower():
+        fail.append("Deep3 reference must render as 'L. Q. Dat ... doi: 10.1109/JIOT.2026.3740931'")
+    p5["floats_after_references"] = re.findall(r"\bTABLE [IVX]+\b|\bFig\. \d+\.", refpart)
+    if p5["floats_after_references"]:
+        fail.append(f"floats rendered after References: {p5['floats_after_references']}")
+    res["p5"] = p5
     res["failures"] = fail
     res["final"] = final
     (ROOT / "results" / "verify_render.json").write_text(json.dumps(res, indent=1, ensure_ascii=False),

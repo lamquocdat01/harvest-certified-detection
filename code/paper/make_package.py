@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """make_package.py (topic 40): submission_package/IoTJ/04_Package/ = main.pdf, supp.pdf, cover_letter.pdf,
-source.zip (main.tex, numbers.tex, sizing_table.tex, refs.bib, main.bbl, figures used by main.tex) and SHA256SUMS.txt.
+source.zip (main.tex, numbers.tex, sizing_table.tex, prereg_table.tex, refs.bib, main.bbl, figures used by main.tex) and SHA256SUMS.txt.
 The source zip contains only what the manuscript needs (no data, no supplement sources)."""
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ def main():
     src = (LATEX / "main.tex").read_text(encoding="utf-8") + (LATEX / "numbers.tex").read_text(encoding="utf-8")
     figs = sorted(set(re.findall(r"figures/[\w\-]+\.pdf", src)))
     with zipfile.ZipFile(PKG / "source.zip", "w", zipfile.ZIP_DEFLATED) as z:
-        for n in ["main.tex", "numbers.tex", "sizing_table.tex", "refs.bib", "main.bbl"] + figs:
+        for n in ["main.tex", "numbers.tex", "sizing_table.tex", "prereg_table.tex", "refs.bib", "main.bbl"] + figs:
             z.write(LATEX / n, n)
     lines = [f"{hashlib.sha256((PKG / n).read_bytes()).hexdigest()}  {n}"
              for n in ("main.pdf", "supp.pdf", "cover_letter.pdf", "source.zip")]

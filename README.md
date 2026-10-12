@@ -32,7 +32,16 @@ All randomness is seeded (seed 42). TRAIN = odd months and half of the videos (s
 months and the other videos. Grid checkpoints are written to `$THS_DATASETS/_derived/40/grid_ckpt`; delete that
 folder for a run from scratch.
 
-## Data (third-party; not redistributed here)
+## Licenses
+
+| What | Licence | File |
+|---|---|---|
+| Code (`code/`) | MIT | `LICENSE` |
+| Derived data and figures (`results/`) | CC BY 4.0 | `LICENSE-DATA` |
+
+Third-party input data keep their own terms (next section); none of them is redistributed here.
+
+## Data provenance & licenses (third-party; not redistributed here)
 
 | Data | Source | Licence (verbatim where available) | Used as |
 |---|---|---|---|
@@ -44,5 +53,7 @@ Derived files in `results/` are released under CC BY 4.0 (see `LICENSE-DATA`) wi
 
 ## Status
 
-The pre-registration commits are local; the release tag and the push are made by the author at submission.
-SHA-256 values printed in the paper refer to the files at the submission tag.
+Tags: `prereg-40-v1` (PREREG v1 frozen before TEST) and `v1.0.0-submission` (the state submitted with the
+paper; its annotation records the commit and the SHA-256 of the submitted `main.pdf`).
+`RELEASE_FILES.txt` lists every released file with its size and SHA-256; SHA-256 values printed in the paper refer
+to the files at the submission tag.
